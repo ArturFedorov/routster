@@ -6,7 +6,7 @@ export class Routes {
   static async getConfiguredRoutes() {
     let routes:Router[] = [];
 
-    const allControllers = Util.findFilesInDirectory('src/features/', []);
+    const allControllers = Util.findFilesInDirectory('src/', []);
     if(!allControllers.length) {
       Logger.appLogger.info('No files of controller found.');
     }
