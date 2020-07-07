@@ -5,6 +5,7 @@
       "cmd": "deno run server.ts",
       "desc": "run my app.ts file",
       "allow": [
+        "write",
         "read",
         "net"
       ]

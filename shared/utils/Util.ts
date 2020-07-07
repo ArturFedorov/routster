@@ -1,31 +1,27 @@
-import AppConfiguration from '../../configs/AppConfiguration.ts';
-
 export class Util {
   /**
    *
    * For dynamic import of all controllers system should firsltly read filesystem and get all
-   * files with name template *.controllers.ts
+   * files with name template *.controllers.
    *
    **/
-  public static findControllerFiles = (dir:string, filelist = []) => {
-    const controllerMask = AppConfiguration.server.env === 'development' ? 'controller.ts' : 'controller.js';
-    // const files = Deno.readDirSync(`${dir}`);
-    const files = Deno.readDirSync(dir)
-    for (const dirEntry of Deno.readDirSync(dir)) {
-      // Deno
-      console.log(dirEntry.isDirectory);
+  public static findFilesInDirectory (dir:string, fileList: string[], nameMask = '.controller.'): string[] {
+
+    let files = Deno.readDirSync(dir);
+    fileList = fileList || [];
+
+    for (const dirEntry of files) {
+      if(dirEntry.isDirectory) {
+        fileList = Util.findFilesInDirectory(`${dir}${dirEntry.name}`, fileList);
+      } else {
+        if(dirEntry.name.includes(nameMask)) {
+          fileList.push(`../${dir}/${dirEntry.name}`);
+        } else {
+          throw Error('feature folder must contain at least one controller file');
+        }
+      }
     }
 
-    // files.forEach(file => {
-    //   if (fs.statSync(dir + file).isDirectory()) {
-    //     filelist = Util.findControllerFiles(`${dir}${file}/`, filelist);
-    //   } else {
-    //     if (file.indexOf(controllerMask) > 0) {
-    //       filelist.push(`../${dir}${file}`);
-    //     }
-    //   }
-    // });
-    //
-    // return filelist;
+    return fileList;
   }
 }
