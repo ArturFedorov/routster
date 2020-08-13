@@ -16,8 +16,6 @@ export class Util {
       } else {
         if(dirEntry.name.includes(nameMask)) {
           fileList.push(`../${dir}/${dirEntry.name}`);
-        } else {
-          throw Error('feature folder must contain at least one controller file');
         }
       }
     }
