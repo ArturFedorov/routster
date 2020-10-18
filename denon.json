@@ -2,12 +2,13 @@
   "$schema": "https://deno.land/x/denon/schema.json",
   "scripts": {
     "start": {
-      "cmd": "deno run server.ts",
+      "cmd": "deno run mod.ts",
       "desc": "run my app.ts file",
       "allow": [
         "write",
         "read",
-        "net"
+        "net",
+        "env"
       ]
     },
     "lint": {
@@ -16,6 +17,16 @@
     },
     "logger": {
       "debug": true
+    },
+    "debug": {
+      "cmd": "deno run mod.ts",
+      "desc": "debug routster application",
+      "inspect": "127.0.0.1:3000",
+      "allow":[
+        "write",
+        "read",
+        "net"
+      ]
     }
   }
 }

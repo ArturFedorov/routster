@@ -1,5 +1,4 @@
-import * as log from 'https://deno.land/std/log/mod.ts';
-
+import { log } from '../dept.ts';
 
 export class Logger {
   static readonly maxLogSize = 500 * 1024; // 500 kb
